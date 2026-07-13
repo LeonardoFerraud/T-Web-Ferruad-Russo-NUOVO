@@ -1,0 +1,53 @@
+/* Variabili per gestire i colori facilmente */
+:root {
+  --primary-dark: #0f172a;    /* Blu Navy profondo */
+  --accent-green: #10b981;    /* Verde crescita finanziaria */
+  --text-light: #f8fafc;      /* Bianco ghiaccio */
+  --text-dimmed: #94a3b8;     /* Grigio per i link non attivi */
+}
+
+/* Container principale */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: var(--primary-dark);
+  color: var(--text-light);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sottile ombra per profondità */
+}
+
+/* Logo o Nome del Brand */
+.navbar-logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-decoration: none;
+  letter-spacing: -0.5px; /* Look più moderno/fintech */
+}
+
+/* Lista dei link */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem; /* Spaziatura generosa tra i link */
+}
+
+/* Stile dei link */
+.navbar-links li a {
+  text-decoration: none;
+  color: var(--text-dimmed);
+  font-weight: 500;
+  transition: color 0.3s ease; /* Transizione fluida */
+}
+
+/* Effetto al passaggio del mouse (hover) */
+.navbar-links li a:hover {
+  color: var(--accent-green);
+}
+
+/* Eventuale link attivo (da gestire con classe specifica se necessario) */
+.navbar-links li a.active {
+  color: var(--text-light);
+  border-bottom: 2px solid var(--accent-green);
+}
