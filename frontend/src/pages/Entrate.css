@@ -1,0 +1,68 @@
+:root {
+  --primary-dark: #0f172a;
+  --accent-gold: #d4a574;
+  --accent-gold-strong: #e5b896;
+  --text-light: #f8fafc;
+  --text-dimmed: #94a3b8;
+  --surface-soft: #f8fafc;
+  --border-soft: #e2e8f0;
+}
+
+.table-container {
+  margin-top: 1rem;
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  color: var(--primary-dark);
+}
+
+.table-container th,
+.table-container td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.table-container thead th {
+  background: linear-gradient(135deg, var(--primary-dark), #1e293b);
+  color: var(--text-light);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.table-container tbody tr:nth-child(even) {
+  background-color: var(--surface-soft);
+}
+
+.table-container tbody tr:hover {
+  background-color: rgba(212, 165, 116, 0.12);
+}
+
+.table-container tfoot td {
+  background-color: rgba(212, 165, 116, 0.14);
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.table-container button {
+  padding: 0.45rem 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--accent-gold);
+  color: var(--primary-dark);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.table-container button:hover {
+  background-color: var(--accent-gold-strong);
+  transform: translateY(-1px);
+}

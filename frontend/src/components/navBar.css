@@ -1,7 +1,7 @@
 /* Variabili per gestire i colori facilmente */
 :root {
   --primary-dark: #0f172a;    /* Blu Navy profondo */
-  --accent-green: #10b981;    /* Verde crescita finanziaria */
+  --accent-green: #d4a574;    /* Verde crescita finanziaria */
   --text-light: #f8fafc;      /* Bianco ghiaccio */
   --text-dimmed: #94a3b8;     /* Grigio per i link non attivi */
 }
