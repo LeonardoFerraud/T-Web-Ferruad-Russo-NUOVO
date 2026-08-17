@@ -29,29 +29,28 @@ const Spese = () => {
         listaSpese.reduce((acc, curr) => acc + curr.importo, 0), 
     [listaSpese]);
 
-    //FUNZIONE PER L'INSERIMENTO DELLE SPESE
+    //FUNZIONE PER L'INSERIMENTO DELLE SPESE (arrow function assegnata alla costante "aggiungiSpesa")
+    //COME FUNZIONA setListaSpese():
+        //--> Con "pre =>" fa una callback per andare ad aggiornare i dati più recenti dell'array con le spese
+        //--> Con "...prev" crea una copia dell'array perchè in react non si può fare una semplice push()
+        //--> Con il contenuto di {...} definiamo un nuovo oggetto spesa
     const aggiungiSpesa = () => {
         if(!importo) return;
-        const nuovaSpesa: Spesa = {
-            id: Date.now(),
-            provenienza,
-            importo: Number(importo)
-        };
-        setListaSpese([...listaSpese, nuovaSpesa]);
+        setListaSpese(prev => [...prev, { id: Date.now(), provenienza, importo: +importo }]);
         setProvenienza('');
         setImporto('');
     }
 
-    //RAGGRUPPA LE SPESE UGUALI
+    //RAGGRUPPA LE SPESE UGUALI con il ciclo reduce a cui viene passato l'oggetto <provenienza,valore>, acc sta per accumulatore
     const totalePerProvenienza = listaSpese.reduce<Record<string, number>>((acc, spesa) => {
         acc[spesa.provenienza] = (acc[spesa.provenienza] || 0) + spesa.importo;
         return acc;
-    }, {});
+    }, {}); // {} oggetto vuoto con cui parte l'accumulatore
 
-    // LISTA DELLE PROVENIENZE UNICHE (usata per mostrare ogni provenienza una sola volta)
-    const provenienzeUniche = Array.from(new Set(listaSpese.map(s => s.provenienza)));
+    //LISTA DELLE PROVENIENZE UNICHE (usata per mostrare ogni provenienza una sola volta)
+    const provenienzeUniche = Array.from(new Set(listaSpese.map(spesa => spesa.provenienza)));
 
-    // DATI AGGREGATI PER IL GRAFICO: una voce per ogni provenienza
+    //DATI AGGREGATI PER IL GRAFICO: una voce per ogni provenienza
     const datiGrafico = provenienzeUniche.map((prov, idx) => ({
         id: idx,
         provenienza: prov,
