@@ -2,10 +2,10 @@ import { useState, useEffect, useMemo } from 'react';
 import { GraficoTorta } from '../components/torta';
 import {Card} from "../components/card";
 
-interface Entrata {
-  id: number;
-  provenienza: string;
-  importo: number;
+interface Entrata{
+    id: number;
+    provenienza: string;
+    importo: number;
 }
 
 const Entrate = () => {
@@ -26,6 +26,13 @@ const Entrate = () => {
     listaEntrate.reduce((acc, curr) => acc + curr.importo, 0), 
   [listaEntrate]);
 
+  const aggiungiEntrata = () => {
+    if(!importo) return;
+    setListaEntrate(prev => [...prev, { id: Date.now(), provenienza, importo: +importo }]);
+    setProvenienza('');
+    setImporto('');
+  }
+
   const totalePerProvenienza = listaEntrate.reduce<Record<string, number>>((acc, entrata) => {
     acc[entrata.provenienza] = (acc[entrata.provenienza] || 0) + entrata.importo;
     return acc;
@@ -38,22 +45,6 @@ const Entrate = () => {
     provenienza: prov,
     importo: totalePerProvenienza[prov] ?? 0
   }));
-
-  const aggiungiEntrata = () => {
-    if(!importo) return;
-    const nuova: Entrata = {
-      id: Date.now(),
-      provenienza,
-      importo: Number(importo)
-    };
-    setListaEntrate([...listaEntrate, nuova]);
-    setProvenienza('');
-    setImporto('');
-  }
-
-  const rimuoviProvenienza = (prov: string) => {
-    setListaEntrate(prev => prev.filter(item => item.provenienza !== prov));
-  }
 
   return(
     <>
@@ -96,7 +87,7 @@ const Entrate = () => {
                       <td>{prov}</td>
                       <td>€ {(totalePerProvenienza[prov] ?? 0).toFixed(2)}</td>
                       <td>
-                          <button onClick={() => rimuoviProvenienza(prov)}>Rimuovi</button>
+                          <button onClick={() => setListaEntrate(prev => prev.filter(item => item.provenienza !== prov))}>Rimuovi</button>
                       </td>
                   </tr>
               ))}
