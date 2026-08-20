@@ -1,0 +1,84 @@
+.grafico-fondi {
+	margin: 2rem 0;
+	padding: 1.25rem 1.5rem;
+	border: 1px solid #cbd5e1;
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.grafico-fondi h3 {
+	margin: 0 0 1.25rem;
+	color: #0f172a;
+	font-size: 1.15rem;
+}
+
+.grafico-fondi__lista {
+	display: flex;
+	flex-direction: column;
+	gap: 0.85rem;
+}
+
+.grafico-fondi__riga {
+	display: grid;
+	grid-template-columns: minmax(90px, 0.25fr) 1fr auto;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.grafico-fondi__nome {
+	overflow: hidden;
+	color: #334155;
+	font-size: 0.95rem;
+	font-weight: 700;
+	text-align: right;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.grafico-fondi__traccia {
+	height: 1.25rem;
+	overflow: hidden;
+	border-radius: 999px;
+	background: #e2e8f0;
+}
+
+.grafico-fondi__barra {
+	height: 100%;
+	min-width: 0.35rem;
+	border-radius: inherit;
+	background: linear-gradient(90deg, #0f172a, #e5b896);
+	transition: width 0.3s ease;
+}
+
+.grafico-fondi__valore {
+	min-width: 3rem;
+	color: #0f172a;
+	font-weight: 700;
+	text-align: right;
+}
+
+@media (max-width: 560px) {
+	.grafico-fondi {
+		padding: 1rem;
+	}
+
+	.grafico-fondi__riga {
+		grid-template-columns: 1fr auto;
+		gap: 0.45rem 0.75rem;
+	}
+
+	.grafico-fondi__nome {
+		text-align: left;
+	}
+
+	.grafico-fondi__traccia {
+		grid-column: 1 / -1;
+		grid-row: 2;
+	}
+
+	.grafico-fondi__valore {
+		grid-column: 2;
+		grid-row: 1;
+	}
+}

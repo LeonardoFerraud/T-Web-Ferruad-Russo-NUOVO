@@ -3,6 +3,7 @@ import Navbar from './components/navBar';
 import Entrate from './pages/Entrate';
 import Spese from './pages/Spese';
 import Fondi from './pages/Fondi';
+import Dashboard from './pages/Dashboard';
 
 function App() {
 return (
@@ -11,7 +12,7 @@ return (
       
       <main>
         <Routes>
-          <Route path="/" element={<Entrate />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/Entrate" element={<Entrate />} />
           <Route path="/Spese" element={<Spese />} />
           <Route path="/Fondi" element={<Fondi />} />

@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import CardFondi from "../components/cardFondi";
+import GraficoFondi from '../components/GraficoBarre';
 
 interface Fondi{
     id: number;
@@ -64,6 +65,9 @@ const Fondi = () => {
                 </CardFondi>
                 ))
             )}
+
+            <GraficoFondi fondi={listaFondi} />
+
         </div>
     );
 }
