@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import CardFondi from "../components/cardFondi";
 import GraficoFondi from '../components/GraficoBarre';
+import { useFondi } from '../hook/useFondi';
 
 interface Fondi{
     id: number;
@@ -13,16 +14,7 @@ const Fondi = () => {
     const [nome, setNome] = useState('');
     const [valore, setValore] = useState('');
 
-    //RECUPERO DATI DA LOCAL STOR
-    const [listaFondi, setListaFondi] = useState<Fondi[]>(() => {
-        const saved = localStorage.getItem('miei-fondi');
-        return saved ? JSON.parse(saved) : [];
-    });
-
-    //SALVATAGGIO AUTOMATICO QUANDO "listaFondi" CAMBIA
-    useEffect(() => {
-        localStorage.setItem('miei-fondi', JSON.stringify(listaFondi));
-    }, [listaFondi]);
+    const { listaFondi, setListaFondi } = useFondi();
 
     const creaFondo = () => {
         if(!nome) return;

@@ -1,15 +1,15 @@
 .grafico-fondi {
 	margin: 2rem 0;
 	padding: 1.25rem 1.5rem;
-	border: 1px solid #cbd5e1;
+	border: 2px solid #ffffff;
 	border-radius: 12px;
-	background: rgba(255, 255, 255, 0.9);
+	background: #0f172a;
 	box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
 .grafico-fondi h3 {
 	margin: 0 0 1.25rem;
-	color: #0f172a;
+	color: #f9fbff;
 	font-size: 1.15rem;
 }
 
@@ -28,7 +28,7 @@
 
 .grafico-fondi__nome {
 	overflow: hidden;
-	color: #334155;
+	color: #ffffff;
 	font-size: 0.95rem;
 	font-weight: 700;
 	text-align: right;
@@ -40,20 +40,20 @@
 	height: 1.25rem;
 	overflow: hidden;
 	border-radius: 999px;
-	background: #e2e8f0;
+	background: #000000;
 }
 
 .grafico-fondi__barra {
 	height: 100%;
 	min-width: 0.35rem;
 	border-radius: inherit;
-	background: linear-gradient(90deg, #0f172a, #e5b896);
+	background: linear-gradient(90deg, #e5b896, #e4cfc0);
 	transition: width 0.3s ease;
 }
 
 .grafico-fondi__valore {
 	min-width: 3rem;
-	color: #0f172a;
+	color: #ffffff;
 	font-weight: 700;
 	text-align: right;
 }

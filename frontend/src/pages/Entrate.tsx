@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { GraficoTorta } from '../components/torta';
 import {Card} from "../components/card";
+import { useEntrate } from '../hook/useEntrate';
 
 interface Entrata{
     id: number;
@@ -13,18 +14,11 @@ const Entrate = () => {
   const [provenienza, setProvenienza] = useState('');
   const [importo, setImporto] = useState('');
 
-  const [listaEntrate, setListaEntrate] = useState<Entrata[]>(() => {
-    const saved = localStorage.getItem('mie-entrate');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const { listaEntrate, setListaEntrate, totale, datiGrafico } = useEntrate();
 
   useEffect(() => {
     localStorage.setItem('mie-entrate', JSON.stringify(listaEntrate));
   }, [listaEntrate]);
-
-  const totale = useMemo(() => 
-    listaEntrate.reduce((acc, curr) => acc + curr.importo, 0), 
-  [listaEntrate]);
 
   const aggiungiEntrata = () => {
     if(!importo) return;
@@ -39,12 +33,6 @@ const Entrate = () => {
   }, {});
 
   const provenienzeUniche = Array.from(new Set(listaEntrate.map(s => s.provenienza)));
-
-  const datiGrafico = provenienzeUniche.map((prov, idx) => ({
-    id: idx,
-    provenienza: prov,
-    importo: totalePerProvenienza[prov] ?? 0
-  }));
 
   return(
     <>
