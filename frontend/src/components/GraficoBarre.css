@@ -1,5 +1,6 @@
 .grafico-fondi {
-	margin: 2rem 0;
+	max-width: 600px;
+	margin: 2rem auto;
 	padding: 1.25rem 1.5rem;
 	border: 2px solid #ffffff;
 	border-radius: 12px;

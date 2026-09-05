@@ -8,6 +8,7 @@ interface Spesa {
 
 interface Props {
   dati: Spesa[];
+  compatto?: boolean;
 }
 
 // Palette di colori per le fette del grafico
@@ -16,7 +17,7 @@ const COLORI = [
   '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'
 ];
 
-export const GraficoTorta: React.FC<Props> = ({ dati }) => {
+export const GraficoTorta: React.FC<Props> = ({ dati, compatto = false }) => {
   // Riferimento all'elemento <canvas> nel DOM
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -72,11 +73,11 @@ export const GraficoTorta: React.FC<Props> = ({ dati }) => {
   }, [dati]);
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className={compatto ? 'grafico-torta grafico-torta--compatto' : 'grafico-torta'} style={{ textAlign: 'center' }}>
       <canvas
         ref={canvasRef}
-        width={300}
-        height={300}
+        width={compatto ? 180 : 300}
+        height={compatto ? 180 : 300}
         style={{ border: '1px solid #e5e7eb', borderRadius: '8px', display: 'block', margin: '0 auto', maxWidth: '100%' }}
       />
       {/* Legenda: colore + provenienza + importo + percentuale */}

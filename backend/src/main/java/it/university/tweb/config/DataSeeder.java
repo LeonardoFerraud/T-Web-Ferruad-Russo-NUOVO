@@ -3,6 +3,7 @@ package it.university.tweb.config;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import it.university.tweb.model.Document;
 import it.university.tweb.model.Meeting;
@@ -28,50 +29,57 @@ public class DataSeeder {
                                MeetingRepository meetingRepository,
                                DocumentRepository documentRepository,
                                MilestoneRepository milestoneRepository,
-                               NotificationRepository notificationRepository) {
+                               NotificationRepository notificationRepository,
+                               PasswordEncoder passwordEncoder) {
         return args -> {
-            User admin = new User();
-            admin.setUsername("admin");
-            admin.setPassword("admin");
-            admin.setRole("ADMIN");
-            userRepository.save(admin);
+            User admin = userRepository.findByUsername("admin").orElseGet(() -> {
+                User newAdmin = new User();
+                newAdmin.setUsername("admin");
+                newAdmin.setPassword(passwordEncoder.encode("admin123"));
+                newAdmin.setRole("ADMIN");
+                return userRepository.save(newAdmin);
+            });
 
-            User user = new User();
-            user.setUsername("user");
-            user.setPassword("user");
-            user.setRole("USER");
-            userRepository.save(user);
+            User user = userRepository.findByUsername("user").orElseGet(() -> {
+                User newUser = new User();
+                newUser.setUsername("user");
+                newUser.setPassword(passwordEncoder.encode("user123"));
+                newUser.setRole("USER");
+                return userRepository.save(newUser);
+            });
 
-            Project project = new Project();
-            project.setTitle("Progetto iniziale");
-            project.setStatus("In corso");
-            project.setOwner(admin);
-            projectRepository.save(project);
+            if (projectRepository.count() == 0) {
+                Project project = new Project();
+                project.setTitle("Progetto iniziale");
+                project.setStatus("In corso");
+                project.setOwner(admin);
+                projectRepository.save(project);
 
-            Task task = new Task();
-            task.setDescription("Definire architettura");
-            task.setProject(project);
-            task.setUser(user);
-            taskRepository.save(task);
+                Task task = new Task();
+                task.setDescription("Definire architettura");
+                task.setProject(project);
+                task.setUser(user);
+                taskRepository.save(task);
 
-            Meeting meeting = new Meeting();
-            meeting.setTitle("Sprint planning");
-            meeting.setScheduledFor("2026-07-10");
-            meetingRepository.save(meeting);
+                Meeting meeting = new Meeting();
+                meeting.setTitle("Sprint planning");
+                meeting.setScheduledFor("2026-07-10");
+                meetingRepository.save(meeting);
 
-            Document document = new Document();
-            document.setName("Specifica");
-            document.setCategory("Tecnico");
-            documentRepository.save(document);
+                Document document = new Document();
+                document.setName("Specifica");
+                document.setCategory("Tecnico");
+                documentRepository.save(document);
 
-            Milestone milestone = new Milestone();
-            milestone.setName("Rilascio MVP");
-            milestone.setDueDate("2026-07-20");
-            milestoneRepository.save(milestone);
+                Milestone milestone = new Milestone();
+                milestone.setName("Rilascio MVP");
+                milestone.setDueDate("2026-07-20");
+                milestoneRepository.save(milestone);
 
-            Notification notification = new Notification();
-            notification.setMessage("Nuova attività disponibile");
-            notificationRepository.save(notification);
+                Notification notification = new Notification();
+                notification.setMessage("Nuova attività disponibile");
+                notificationRepository.save(notification);
+            }
         };
     }
 }

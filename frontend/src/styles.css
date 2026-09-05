@@ -26,6 +26,14 @@ select {
   min-height: 100vh;
 }
 
+.loading-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  color: #0f766e;
+  font-weight: 700;
+}
+
 .app-shell {
   max-width: 1100px;
   margin: 0 auto;

@@ -1,59 +1,46 @@
-import { useState, useEffect, useMemo} from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export interface Entrata {
   id: number;
-  provenienza: string;
-  importo: number;
+  source: string;
+  amount: number;
+  date: string;
 }
 
 export const useEntrate = () => {
   // RECUPERO DATI DA LOCAL STORAGE
-  const [listaEntrate, setListaEntrate] = useState<Entrata[]>(() => {
-    const saved = localStorage.getItem('mie-entrate');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [listaEntrate, setListaEntrate] = useState<Entrata[]>([]);
+  const ricarica = () => fetch('/api/incomes', { credentials: 'include' })
+    .then((response) => response.ok ? response.json() : [])
+    .then(setListaEntrate);
 
-  // SALVATAGGIO AUTOMATICO
-  useEffect(() => {
-    localStorage.setItem('mie-entrate', JSON.stringify(listaEntrate));
-  }, [listaEntrate]);
+  useEffect(() => { void ricarica(); }, []);
 
-  // SINCRONIZZAZIONE TRA SCHEDE/FINESTRE
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('mie-entrate');
-      if (saved) setListaEntrate(JSON.parse(saved));
-    };
+  const aggiungiEntrata = async (source: string, amount: number, date: string) => {
+    const response = await fetch('/api/incomes', {
+      method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source, amount, date })
+    });
+    if (!response.ok) throw new Error('Impossibile salvare l entrata');
+    await ricarica();
+  };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+  const rimuoviEntrata = async (id: number) => {
+    await fetch(`/api/incomes/${id}`, { method: 'DELETE', credentials: 'include' });
+    await ricarica();
+  };
 
   // CALCOLO DEL TOTALE
   const totale = useMemo(() => {
-    return listaEntrate.reduce((acc, curr) => acc + curr.importo, 0);
+    return listaEntrate.reduce((acc, curr) => acc + Number(curr.amount), 0);
   }, [listaEntrate]);
 
   // ELABORAZIONE DATI PER IL GRAFICO
   const datiGrafico = useMemo(() => {
-    const totalePerProvenienza = listaEntrate.reduce<Record<string, number>>((acc, entrata) => {
-      acc[entrata.provenienza] = (acc[entrata.provenienza] || 0) + entrata.importo;
-      return acc;
-    }, {});
-
-    const provenienzeUniche = Array.from(new Set(listaEntrate.map(s => s.provenienza)));
-
-    return provenienzeUniche.map((prov, idx) => ({
-      id: idx,
-      provenienza: prov,
-      importo: totalePerProvenienza[prov] ?? 0
-    }));
+    return listaEntrate.map((entrata) => ({ id: entrata.id, provenienza: entrata.source, importo: Number(entrata.amount) }));
   }, [listaEntrate]);
 
   return { 
-    listaEntrate, 
-    setListaEntrate, 
-    totale, 
-    datiGrafico 
+    listaEntrate, totale, datiGrafico, aggiungiEntrata, rimuoviEntrata
   };
 };
