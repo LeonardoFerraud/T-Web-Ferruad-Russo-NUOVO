@@ -1,0 +1,71 @@
+.grafico-bilanci {
+	max-width: 600px;
+	margin: 2rem auto;
+	padding: 1.25rem 1.5rem;
+	border: 2px solid #ffffff;
+	border-radius: 12px;
+	background: #0f172a;
+	box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.grafico-bilanci__intestazione,
+.grafico-bilanci__etichette {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.grafico-bilanci h3,
+.grafico-bilanci__etichette,
+.grafico-bilanci strong {
+	color: #ffffff;
+}
+
+.grafico-bilanci h3 {
+	margin: 0 0 1.25rem;
+}
+
+.grafico-bilanci strong.positivo {
+	color: #86efac;
+}
+
+.grafico-bilanci strong.negativo {
+	color: #fca5a5;
+}
+
+.grafico-bilanci__traccia {
+	position: relative;
+	height: 1.25rem;
+	margin: 0.5rem 0;
+	border-radius: 999px;
+	background: #000000;
+}
+
+.grafico-bilanci__traccia::before {
+	position: absolute;
+	top: -0.3rem;
+	bottom: -0.3rem;
+	left: 50%;
+	width: 2px;
+	content: '';
+	background: #ffffff;
+}
+
+.grafico-bilanci__barra {
+	height: 100%;
+	border-radius: 999px;
+	transition: width 0.3s ease;
+}
+
+.grafico-bilanci__barra.positivo {
+	background: #4ade80;
+}
+
+.grafico-bilanci__barra.negativo {
+	background: #f87171;
+}
+
+.grafico-bilanci__etichette {
+	font-size: 0.85rem;
+}

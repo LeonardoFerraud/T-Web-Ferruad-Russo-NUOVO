@@ -1,0 +1,219 @@
+.fondi-page {
+	--page-ink: #102a43;
+	--page-muted: #627d98;
+	--page-line: #d9e2ec;
+	--page-accent: #c77d1a;
+	max-width: 1180px;
+	margin: 0 auto;
+	padding: 3rem 2rem 4rem;
+	color: var(--page-ink);
+}
+
+.fondi-page__hero {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 2rem;
+	margin-bottom: 2rem;
+}
+
+.fondi-page__eyebrow {
+	margin: 0 0 0.55rem;
+	color: var(--page-accent);
+	font-size: 0.75rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.fondi-page h1 {
+	margin: 0;
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: clamp(2.2rem, 5vw, 4rem);
+	font-weight: 500;
+	line-height: 0.98;
+}
+
+.fondi-page__hero p:last-child {
+	max-width: 360px;
+	margin: 0;
+	color: var(--page-muted);
+	font-size: 0.98rem;
+	line-height: 1.6;
+	text-align: right;
+}
+
+.fondi-page__total {
+	margin-bottom: 1.25rem;
+	padding: 1.25rem 1.5rem;
+	border: 1px solid var(--page-line);
+	border-radius: 14px;
+	background: #ffffff;
+}
+
+.fondi-page__total-label {
+	display: block;
+	margin-bottom: 0.45rem;
+	color: var(--page-muted);
+	font-size: 0.78rem;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.fondi-page__total-value {
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 2.4rem;
+	font-weight: 500;
+	color: var(--page-accent);
+}
+
+.fondi-page__workspace {
+	display: grid;
+	grid-template-columns: minmax(250px, 0.7fr) minmax(0, 1.3fr);
+	gap: 1.25rem;
+	align-items: start;
+}
+
+.fondi-page__panel {
+	min-width: 0;
+	padding: 1.5rem;
+	border: 1px solid var(--page-line);
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.92);
+	box-shadow: 0 14px 30px rgba(16, 42, 67, 0.06);
+}
+
+.fondi-page__panel h2 {
+	margin: 0 0 0.35rem;
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 1.45rem;
+	font-weight: 500;
+}
+
+.fondi-page__description {
+	margin: 0 0 1.25rem;
+	color: var(--page-muted);
+	font-size: 0.88rem;
+}
+
+.fondi-page__form {
+	display: grid;
+	gap: 0.8rem;
+}
+
+.fondi-page__form label {
+	color: var(--page-muted);
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.fondi-page__form input {
+	width: 100%;
+	margin-top: 0.35rem;
+	padding: 0.75rem 0.85rem;
+	border: 1px solid var(--page-line);
+	border-radius: 8px;
+	background: #f8fafc;
+	color: var(--page-ink);
+}
+
+.fondi-page__form input:focus {
+	outline: 2px solid rgba(199, 125, 26, 0.3);
+	border-color: var(--page-accent);
+}
+
+.fondi-page__primary-button {
+	margin-top: 0.35rem;
+	background: var(--page-accent);
+}
+
+.fondi-page__chart {
+	min-height: 300px;
+}
+
+.fondi-page__chart .grafico-fondi {
+	max-width: none;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.fondi-page__chart .grafico-fondi h3 {
+	display: none;
+}
+
+.fondi-page__list-panel {
+	grid-column: 1 / -1;
+}
+
+.fondi-page__list {
+	display: grid;
+	gap: 0.65rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.fondi-page__item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem;
+	border: 1px solid var(--page-line);
+	border-radius: 10px;
+	background: #ffffff;
+}
+
+.fondi-page__item-name {
+	font-weight: 700;
+}
+
+.fondi-page__item-value {
+	margin-left: auto;
+	color: var(--page-accent);
+	font-weight: 800;
+}
+
+.fondi-page__remove-button {
+	padding: 0.45rem 0.7rem;
+	background: #fff3df;
+	color: #996116;
+	font-size: 0.8rem;
+}
+
+.fondi-page__empty {
+	padding: 2rem 1rem;
+	border: 1px dashed var(--page-line);
+	color: var(--page-muted);
+	text-align: center;
+}
+
+@media (max-width: 820px) {
+	.fondi-page {
+		padding: 2.25rem 1.25rem 3rem;
+	}
+
+	.fondi-page__hero {
+		align-items: start;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.fondi-page__hero p:last-child {
+		text-align: left;
+	}
+
+	.fondi-page__workspace {
+		grid-template-columns: 1fr;
+	}
+
+	.fondi-page__list-panel {
+		grid-column: auto;
+	}
+}
